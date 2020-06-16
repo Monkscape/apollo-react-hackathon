@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import gql from 'graphql-tag';
 
 import {useQuery} from '@apollo/react-hooks'
-import BatteryRecordManager from './BatteryRecordManager';
-import UserManager from './UserManager';
+import BatteryRecordManager from './battery-record/BatteryRecordManager';
+import UserManager from './user/UserManager';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from './Header';
 
@@ -34,16 +34,13 @@ query getData($showUser: Boolean!) {
 `
 
 const DataManager = () => {
-    //const [queryData, setQueryData] = useState<any>({})
     const { loading, error, data } = useQuery(STARTUP_QUERY, {
         variables: { showUser: true }
       });
-    
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Failed</p>
 
-    // Put data into state
-    //setQueryData(data)
 
     return (
         <Switch>
