@@ -36,24 +36,39 @@ const BatteryRecordTable = ({rows, deleteRow}: BatteryRecordTableProps) => {
             title: 'User Name',
             dataIndex: 'user',
             key: 'user',
-            render: (user: any) => (user.name)
+            render: (user: any) => (user.name),
+            defaultSortOrder: 'descend',
+            sorter: (a: any,b: any) => a.user.name.length - b.user.name.length
         },
         {
             title: 'Battery Percentage',
             dataIndex: 'batteryPercentage',
             key: 'batteryPercentage',
-            render: (percentage: string) => percentage + ('%')
+            render: (percentage: string) => percentage + ('%'),
+            sorter: (a: any,b: any) => a.batteryPercentage - b.batteryPercentage
         },
         {
             title: 'Currently Charging',
             dataIndex: 'isCharging',
             key: 'isCharging',
+            filters: [
+                {
+                    text: 'True',
+                    value: true
+                },
+                {
+                    text: 'False',
+                    value: false
+                }
+            ],
+            onFilter: (value: string, record: any) => record.isCharging === value,
             render: (isCharging: boolean) => isCharging.toString()
         },
         {
             title: 'Temperature',
             dataIndex: 'temperature',
-            key: 'temperature'
+            key: 'temperature',
+            sorter: (a: any,b: any) => a.temperature.length - b.temperature.length
         },
         {
             title: 'Time Remaining',
