@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { User } from '../types/user'
 import UserList from './UserList'
+import UserTable from './UserTable'
 
 interface UserManagerProps {
     users: User[];
@@ -9,7 +10,7 @@ interface UserManagerProps {
 const UserManager = ({users}: UserManagerProps) => {
     const [userState, setUsers] = useState<User[]>([])
     useEffect(() => setUsers(users), [])
-    return <UserList users={userState}/>
+    return <UserTable rows={users}/>
 }
 
 export default UserManager

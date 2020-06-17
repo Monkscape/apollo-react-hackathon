@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
 import ApolloClient from 'apollo-boost';
+import 'antd/dist/antd.css';
 
 import { ApolloProvider } from '@apollo/react-hooks'
 import DataManager from './DataManager';

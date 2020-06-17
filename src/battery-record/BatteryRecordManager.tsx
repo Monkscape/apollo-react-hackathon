@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import BatteryRecordList from './BatteryRecordList';
 import { BatteryRecord } from '../types/batteryrecord';
+import BatteryRecordTable from './BatteryRecordTable';
 
 interface BatteryRecordManagerProps {
     records: BatteryRecord[];
@@ -9,7 +10,7 @@ interface BatteryRecordManagerProps {
 const BatteryRecordManager = ({records}: BatteryRecordManagerProps) => {
     const [recordsState, setRecordsState] = useState<BatteryRecord[]>([])
     useEffect(() => setRecordsState(records), [])
-    return <BatteryRecordList records={recordsState}/>
+    return <BatteryRecordTable rows={recordsState}/>
 }
 
 export default BatteryRecordManager
