@@ -52,7 +52,7 @@ const BatteryRecordTable = ({rows, deleteRow}: BatteryRecordTableProps) => {
                     value: false
                 }
             ],
-            onFilter: (value: string, record: any) => record.isCharging === value,
+            onFilter: (value: any, record: BatteryRecord) => record.isCharging === value,
             render: (isCharging: boolean) => isCharging.toString()
         },
         {
