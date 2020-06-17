@@ -1,6 +1,7 @@
 import React from 'react'
-import { BatteryRecord } from './types/batteryrecord'
 import BatteryRecordEntry from './BatteryRecordEntry'
+
+import { BatteryRecord } from '../types/batteryrecord'
 
 interface BatteryRecordListProps {
     records: BatteryRecord[];
