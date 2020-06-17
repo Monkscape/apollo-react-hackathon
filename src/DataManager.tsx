@@ -7,11 +7,13 @@ import BatteryRecordManager from './battery-record/BatteryRecordManager';
 import UserManager from './user/UserManager';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+const limit = 500;
+
 const STARTUP_QUERY = gql`
-query getData($showUser: Boolean!) {
-    batteryRecords: listBatteryRecords { 
+query getData($limit: Int!) {
+    batteryRecords: listBatteryRecords(limit: $limit) { 
       items {
-        user @include(if: $showUser) {
+        user {
           name
         }
         id
@@ -34,7 +36,7 @@ query getData($showUser: Boolean!) {
 
 const DataManager = () => {
     const { loading, error, data } = useQuery(STARTUP_QUERY, {
-        variables: { showUser: true }
+        variables: { limit }
       });
 
     if (loading) return <p>Loading...</p>;
