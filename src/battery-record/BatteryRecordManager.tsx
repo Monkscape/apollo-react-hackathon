@@ -7,8 +7,8 @@ interface BatteryRecordManagerProps {
 }
 
 const BatteryRecordManager = ({records}: BatteryRecordManagerProps) => {
-    const [recordsState, setRecords] = useState<BatteryRecord[]>([])
-    useEffect(() => setRecords(records), [])
+    const [recordsState, setRecordsState] = useState<BatteryRecord[]>([])
+    useEffect(() => setRecordsState(records), [])
     return <BatteryRecordList records={recordsState}/>
 }
 

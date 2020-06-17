@@ -1,5 +1,5 @@
 import React from 'react'
-import { BatteryRecord } from './types/batteryrecord'
+import { BatteryRecord } from '../types/batteryrecord'
 
 interface BatteryRecordEntry {
     record: BatteryRecord;
@@ -8,14 +8,17 @@ interface BatteryRecordEntry {
 const BatteryRecordEntry = ({record}: BatteryRecordEntry) => {
     const userColumn = (record.user) ? <td>{record.user.name}</td> : <></>
 
+    const timeCreated = new Date(record.timeCreated);
+
     return (
         <tr key={record.id}>
             <td>{record.isCharging.toString()}</td>
             <td>{record.temperature}</td>
             {userColumn}
-            <td>{record.timeCreated}</td>
             <td>{record.timeRemaining}</td>
             <td>{record.batteryPercentage}</td>
+            <td>{timeCreated.toDateString()}</td>
+            <td>{timeCreated.toTimeString()}</td>
         </tr>
     )
 }
