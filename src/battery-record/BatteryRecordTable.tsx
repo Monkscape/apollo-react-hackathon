@@ -4,6 +4,7 @@ import { BatteryRecord } from '../types/batteryrecord'
 import { standardColumns } from '../table/standard-columns';
 import {useMutation} from '@apollo/react-hooks'
 import gql from 'graphql-tag';
+import { ColumnsType } from 'antd/lib/table';
 
 interface BatteryRecordTableProps {
     rows: BatteryRecord[];
@@ -22,22 +23,12 @@ const BatteryRecordTable = ({rows, deleteRow}: BatteryRecordTableProps) => {
 
     const [deleteBatteryRecord, {data, error}] = useMutation(DELETE_BATTERY_RECORD)
 
-    const createRows = (records: BatteryRecord[]): any => records.map(record => {
-        const createdAt = new Date(record.timeCreated)
-        return {
-            ...record, 
-            timeCreated: createdAt.toTimeString(),
-            dateCreated: createdAt.toDateString()
-        }
-    });
-
-    const columns = [
+    const columns: ColumnsType<BatteryRecord> = [
         {
             title: 'User Name',
             dataIndex: 'user',
             key: 'user',
             render: (user: any) => (user.name),
-            defaultSortOrder: 'descend',
             sorter: (a: any,b: any) => a.user.name.length - b.user.name.length
         },
         {
@@ -68,7 +59,7 @@ const BatteryRecordTable = ({rows, deleteRow}: BatteryRecordTableProps) => {
             title: 'Temperature',
             dataIndex: 'temperature',
             key: 'temperature',
-            sorter: (a: any,b: any) => a.temperature.length - b.temperature.length
+            sorter: (a: any,b: any) => a.temperature - b.temperature
         },
         {
             title: 'Time Remaining',
@@ -88,7 +79,7 @@ const BatteryRecordTable = ({rows, deleteRow}: BatteryRecordTableProps) => {
         }
     ]
 
-    return <Table dataSource={createRows(rows)} columns={columns}/>
+    return <Table dataSource={rows} columns={columns}/>
 }
 
 export default BatteryRecordTable

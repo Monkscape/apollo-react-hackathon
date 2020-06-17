@@ -9,15 +9,6 @@ interface UserTableProps {
 
 const UserTable = ({rows}: UserTableProps) => {
 
-    const createRows = (users: User[]): any => users.map(user => {
-        const createdAt = new Date(user.timeCreated)
-        return {
-            ...user, 
-            timeCreated: createdAt.toTimeString(),
-            dateCreated: createdAt.toDateString()
-        }
-    });
-    
     const columns = [
         {
             title: 'Name',
@@ -33,7 +24,7 @@ const UserTable = ({rows}: UserTableProps) => {
     ]
 
 
-    return <Table dataSource={createRows(rows)} columns={columns}/>
+    return <Table dataSource={rows} columns={columns}/>
 }
 
 export default UserTable
