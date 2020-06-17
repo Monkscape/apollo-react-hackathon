@@ -5,7 +5,10 @@ export const standardColumns: ColumnsType<any> = [
         title: 'Time Created',
         dataIndex: 'timeCreated',
         key: 'timeCreated',
-        render: (timeCreated: string) => {console.log(timeCreated); return new Date(timeCreated).toISOString()},
+        render: (timeCreated: string) => {
+            const date = new Date(timeCreated)
+            return date.toDateString() + " " + date.toTimeString();
+        },
         sorter: (a: any,b: any): any => new Date(a.timeCreated) < new Date(b.timeCreated)
     }
 ]
