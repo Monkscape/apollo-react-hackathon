@@ -10,7 +10,15 @@ interface BatteryRecordManagerProps {
 const BatteryRecordManager = ({records}: BatteryRecordManagerProps) => {
     const [recordsState, setRecordsState] = useState<BatteryRecord[]>([])
     useEffect(() => setRecordsState(records), [])
-    return <BatteryRecordTable rows={recordsState}/>
+
+    const deleteRow = (id: string) => {
+        console.log(id)
+        const newList = recordsState.filter(record => record.id !== id);
+        console.log(newList)
+        setRecordsState(newList)
+    }
+
+    return <BatteryRecordTable rows={recordsState} deleteRow={deleteRow}/>
 }
 
 export default BatteryRecordManager

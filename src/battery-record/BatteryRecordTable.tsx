@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 
 interface BatteryRecordTableProps {
     rows: BatteryRecord[];
+    deleteRow: (id: string) => void;
 }
 
 const DELETE_BATTERY_RECORD = gql`
@@ -17,9 +18,9 @@ const DELETE_BATTERY_RECORD = gql`
     }
 `
 
-const BatteryRecordTable = ({rows}: BatteryRecordTableProps) => {
+const BatteryRecordTable = ({rows, deleteRow}: BatteryRecordTableProps) => {
 
-    const [deleteBatteryRecord, {data}] = useMutation(DELETE_BATTERY_RECORD)
+    const [deleteBatteryRecord, {data, error}] = useMutation(DELETE_BATTERY_RECORD)
 
     const createRows = (records: BatteryRecord[]): any => records.map(record => {
         const createdAt = new Date(record.timeCreated)
@@ -64,7 +65,10 @@ const BatteryRecordTable = ({rows}: BatteryRecordTableProps) => {
             title: 'Delete',
             key: 'delete',
             render: (text: any, record: BatteryRecord) => (
-                <a onClick={() => deleteBatteryRecord({variables: { id: record.id}})}>Delete</a>
+                <a onClick={() => {
+                    deleteBatteryRecord({variables: { id: record.id}})
+                    deleteRow(record.id)
+                }}>Delete</a>
             )
         }
     ]
