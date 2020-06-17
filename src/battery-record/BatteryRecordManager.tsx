@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import BatteryRecordList from './BatteryRecordList';
-import { BatteryRecord } from './types/batteryrecord';
+import { BatteryRecord } from '../types/batteryrecord';
 
 interface BatteryRecordManagerProps {
-  records: BatteryRecord[];
+    records: BatteryRecord[];
 }
 
 const BatteryRecordManager = ({records}: BatteryRecordManagerProps) => {
-    return <BatteryRecordList records={records}/>
+    const [recordsState, setRecords] = useState<BatteryRecord[]>([])
+    useEffect(() => setRecords(records), [])
+    return <BatteryRecordList records={recordsState}/>
 }
 
 export default BatteryRecordManager

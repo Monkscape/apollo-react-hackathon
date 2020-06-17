@@ -1,5 +1,5 @@
-import React from 'react'
-import { User } from './types/user'
+import React, {useState, useEffect} from 'react'
+import { User } from '../types/user'
 import UserList from './UserList'
 
 interface UserManagerProps {
@@ -7,7 +7,9 @@ interface UserManagerProps {
 }
 
 const UserManager = ({users}: UserManagerProps) => {
-    return <UserList users={users}/>
+    const [userState, setUsers] = useState<User[]>([])
+    useEffect(() => setUsers(users), [])
+    return <UserList users={userState}/>
 }
 
 export default UserManager
