@@ -9,6 +9,6 @@ export const standardColumns: ColumnsType<any> = [
             const date = new Date(timeCreated)
             return date.toDateString() + " " + date.toTimeString();
         },
-        sorter: (a: any,b: any): any => new Date(a.timeCreated) < new Date(b.timeCreated)
+        sorter: (a: any,b: any): any => new Date(a.timeCreated).getTime() - new Date(b.timeCreated).getTime()
     }
 ]
