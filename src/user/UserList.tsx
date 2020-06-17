@@ -1,5 +1,5 @@
 import React from 'react'
-import { User } from './types/user'
+import { User } from '../types/user'
 import UserEntry from './UserEntry'
 
 interface UserListProps {
